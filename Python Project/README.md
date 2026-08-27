@@ -84,3 +84,52 @@ plt.show()
 - Senior Data Engineer and Senior Data Scientist roles show a considerable number of outliers on the higher end of the salary spectrum, suggesting that exceptional skills or circumstances can lead to high pay in these roles. In contrast, Data Analyst roles demonstrate more consistency in salary, with fewer outliers.
 
 - The median salaries increase with the seniority and specialization of the roles. Senior roles (Senior Data Scientist, Senior Data Engineer) not only have higher median salaries but also larger differences in typical salaries, reflecting greater variance in compensation as responsibilities increase.
+
+### Highest Paid & Most Demanded Skills for Data Analysts
+
+```python
+fig, ax = plt.subplots(2,1)
+
+sns.set_theme(style="ticks")
+
+
+sns.barplot(data= df_da_toppay, x = 'median', y = df_da_toppay.index, ax=ax[0], hue = 'median', palette = 'dark:b_r' )
+ax[0].legend().remove()
+ax[0].set_title('Top 10 Highest Paid Skills for Data Analysts')
+ax[0].set_ylabel('')
+ax[0].set_xlabel('')
+ax[0].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+df_da_skills = df_da_skills.sort_values(by='median', ascending=False)
+
+
+sns.barplot(
+    data=df_da_skills,
+    x='median',
+    y=df_da_skills.index,
+    ax=ax[1],
+    hue='median',
+    palette='light:b',
+)
+ax[1].legend().remove()
+ax[1].set_title('Top 10 Most In-Demand Skills for Data Analysts')
+ax[1].set_ylabel('')
+ax[1].set_xlabel('Median Salary (USD)')
+ax[1].set_xlim(ax[0].get_xlim())
+ax[1].xaxis.set_major_formatter(
+    plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K')
+)
+plt.tight_layout()
+plt.show()
+```
+### Results
+
+![alt text](image-2.png)
+
+### Insights
+
+- The top graph shows specialized technical skills like dplyr, Bitbucket, and Gitlab are associated with higher salaries, some reaching up to $200K, suggesting that advanced technical proficiency can increase earning potential.
+
+- The bottom graph highlights that foundational skills like Excel, PowerPoint, and SQL are the most in-demand, even though they may not offer the highest salaries. This demonstrates the importance of these core skills for employability in data analysis roles.
+
+- There's a clear distinction between the skills that are highest paid and those that are most in-demand. Data analysts aiming to maximize their career potential should consider developing a diverse skill set that includes both high-paying specialized skills and widely demanded foundational skills.
